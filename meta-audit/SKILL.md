@@ -3,6 +3,9 @@ name: meta-audit
 description: >
   Use when the user wants to assess their AI coding tool automation maturity,
   identify gaps vs ecosystem benchmarks, or decide what skills/hooks/workflows to build next.
+  Also use when the user asks "how am I doing", "what should I build next",
+  "am I using Claude Code effectively", "show me my automation score",
+  or after completing a major feature/milestone and wanting a retrospective on setup quality.
   Triggers: "我的自动化水平怎么样", "我在哪个段位", "该优先建什么",
   "audit my setup", "how automated am I", monthly review, after major milestone.
 ---

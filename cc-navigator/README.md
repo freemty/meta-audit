@@ -10,36 +10,29 @@
 
 > **Claude Code Skill** | Installable via `npx skills add`
 
-Your Claude Code workflow navigator -- recommends the right skill, agent, or tool for any task based on 11 curated sources. Part of [yuanbo-skills](https://github.com/freemty/yuanbo-skills).
+Your Claude Code workflow navigator -- recommends the right skill, agent, or tool for any task based on 11 curated sources. Part of [meta-audit](https://github.com/freemty/meta-audit) plugin.
 
 ## Install
 
+Install via the meta-audit plugin (includes both cc-navigator and meta-audit skills):
+
 ```bash
-npx skills add freemty/cc-navigator
+git clone https://github.com/freemty/meta-audit.git ~/.claude/plugins/meta-audit
+```
+
+Then add to `~/.claude/settings.json`:
+```json
+{
+  "plugins": ["~/.claude/plugins/meta-audit"]
+}
 ```
 
 <details>
-<summary>Alternative install methods</summary>
-
-**Manual (curl)**
+<summary>Alternative: standalone symlink</summary>
 
 ```bash
-mkdir -p ~/.claude/skills/cc-navigator
-curl -sL https://raw.githubusercontent.com/freemty/cc-navigator/main/skills/cc-navigator/SKILL.md \
-  -o ~/.claude/skills/cc-navigator/SKILL.md
-```
-
-**Git clone (as plugin)**
-
-```bash
-git clone https://github.com/freemty/cc-navigator.git ~/.claude/plugins/cc-navigator
-```
-
-Then add to your `~/.claude/settings.json`:
-```json
-{
-  "plugins": ["~/.claude/plugins/cc-navigator"]
-}
+git clone https://github.com/freemty/meta-audit.git
+ln -sf meta-audit/cc-navigator ~/.claude/skills/cc-navigator
 ```
 
 </details>

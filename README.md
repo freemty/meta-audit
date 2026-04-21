@@ -69,12 +69,30 @@ AI coding tool 自动化成熟度审计。从本地使用数据 + 外部生态�
 - 退步: —
 ```
 
-## Setup
+## Install
+
+**Plugin mode (recommended)**
 
 ```bash
-ln -sf $(pwd) ~/.claude/skills/meta-audit          # meta-audit SKILL.md is at repo root
+git clone https://github.com/freemty/meta-audit.git ~/.claude/plugins/meta-audit
+```
+
+Then add to `~/.claude/settings.json`:
+```json
+{
+  "plugins": ["~/.claude/plugins/meta-audit"]
+}
+```
+
+<details>
+<summary>Alternative: manual symlinks</summary>
+
+```bash
+ln -sf $(pwd)/meta-audit ~/.claude/skills/meta-audit
 ln -sf $(pwd)/cc-navigator ~/.claude/skills/cc-navigator
 ```
+
+</details>
 
 ## License
 
