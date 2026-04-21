@@ -5,9 +5,10 @@ AI coding tool 自动化成熟度审计。从本地使用数据 + 外部生态�
 ## Features
 
 - **L0-L5 成熟度模型** — 基于 skills/hooks/headless/multi-agent/meta-learning 五维评估
-- **外部基准对标** — GitHub API 查询 top repos (superpowers, awesome-claude-skills 等) 作为 P50/P99 参照
+- **外部基准对标** — GitHub API 查询 top repos (superpowers, anthropics/skills 等) 计算覆盖率
 - **Friction → Action 映射** — 从 session facets 提取 friction 根因，映射到具体改进建议
 - **历史趋势追踪** — 报告存档到 `~/.claude/audit-history/`，支持跨月对比
+- **确定性数据采集** — `collect.sh` 输出 JSON 指标，不依赖 LLM 猜测
 - **`--quick` / `--verbose` 模式** — 灵活控制深度
 
 ## Usage
@@ -38,7 +39,7 @@ AI coding tool 自动化成熟度审计。从本地使用数据 + 外部生态�
 | 维度 | 分数 | 生态 P50 | 差距 |
 |------|------|---------|------|
 | Skill 宽度 | 83 | 15 | +68 (top 1%) |
-| Hook 深度 | 7/11 | 3/11 | +4 |
+| Hook 深度 | 6/19 | 3/19 | +3 |
 | Headless | 1 | 0 | +1 |
 | Multi-agent | 6 | 2 | +4 |
 | Meta-learning | ✅ | ❌ | — |
@@ -70,11 +71,10 @@ Then add to `~/.claude/settings.json`:
 ```
 
 <details>
-<summary>Alternative: manual symlinks</summary>
+<summary>Alternative: manual symlink</summary>
 
 ```bash
 ln -sf $(pwd)/meta-audit ~/.claude/skills/meta-audit
-ln -sf $(pwd)/cc-navigator ~/.claude/skills/cc-navigator
 ```
 
 </details>
