@@ -11,6 +11,7 @@ Phase 2 外部基准查询的数据源清单。用 `gh api` 查询，缓存 7 �
 | `anthropics/claude-plugins-official` | marketplace 目录 plugins 数 | 官方生态规模 | `gh api repos/anthropics/claude-plugins-official/contents/plugins` |
 | 本地 `~/.claude/plugins/installed_plugins.json` | 已装 plugin 数 + 版本 | 自身 plugin 覆盖率 | 直接读文件 |
 | `affaan-m/everything-claude-code` | skills/ 目录 + stars | 社区 best practices 汇总规模 | `gh api repos/affaan-m/everything-claude-code` |
+| `garrytan/gstack` | skill 数 + agent 数 + stars + has_headless + has_multi_agent | 最大 power user 框架（47 skills, headless browser, multi-host） | `gh api repos/garrytan/gstack/git/trees/main?recursive=1` |
 
 ## 辅助源（--verbose 模式追加）
 
@@ -20,6 +21,7 @@ Phase 2 外部基准查询的数据源清单。用 `gh api` 查询，缓存 7 �
 | showcase 配置（ChrisWiles 等） | settings.json 中 hooks/skills | 典型 power user 配置对标 |
 | `openai/codex` | feature list + stars | 竞品能力对齐 |
 | `nicepkg/claude-code-skill` | 索引的 skill 总数 | 生态广度（long tail） |
+| `forrestchang/andrej-karpathy-skills` | star 数 + skill 结构 + CLAUDE.md 准则 | 社区 behavioral guidelines 插件标杆，Karpathy 编码准则覆盖度 |
 
 ## 提取字段
 
@@ -41,7 +43,7 @@ Phase 2 外部基准查询的数据源清单。用 `gh api` 查询，缓存 7 �
 ## 统计基准计算
 
 核心源分两类计算，不混源：
-- **框架源**（superpowers, anthropics/skills, everything-claude-code）— 代表"如果全部使用该框架可获得的上限"
+- **框架源**（superpowers, anthropics/skills, everything-claude-code, gstack）— 代表"如果全部使用该框架可获得的上限"
 - **用户源**（本地 installed_plugins）— 代表"用户实际覆盖率"
 
 基准指标：
