@@ -1,20 +1,5 @@
 # meta-audit
 
-Best practices reflection and automation maturity auditing for Claude Code workflows.
-
-Two skills that serve the same goal: making your Claude Code usage more effective through structured reflection. `meta-audit` looks inward (what are you doing manually that could be automated?), `cc-navigator` looks outward (what best practices exist in the ecosystem?).
-
-## Skills
-
-| Skill | Purpose | Trigger |
-|-------|---------|---------|
-| `meta-audit/` | Audit AI automation maturity, identify manual bottlenecks | `/meta-audit` |
-| `cc-navigator/` | Claude Code ecosystem knowledge, skill/workflow best practices | `/cc-navigator` |
-
----
-
-## meta-audit
-
 AI coding tool 自动化成熟度审计。从本地使用数据 + 外部生态基准出发，产出 L0-L5 定位 + 5 轴雷达 + Top-3 行动项。
 
 ## Features

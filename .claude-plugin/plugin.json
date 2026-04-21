@@ -1,7 +1,7 @@
 {
   "name": "meta-audit",
   "version": "1.0.0",
-  "description": "AI automation maturity audit and Claude Code workflow navigation",
+  "description": "AI automation maturity audit — L0-L5 scoring, ecosystem benchmarks, Top-3 actions",
   "author": {
     "name": "freemty",
     "url": "https://github.com/freemty"
@@ -9,6 +9,6 @@
   "homepage": "https://github.com/freemty/meta-audit",
   "repository": "https://github.com/freemty/meta-audit",
   "license": "MIT",
-  "keywords": ["audit", "automation", "navigator", "claude-code"],
-  "skills": ["./meta-audit", "./cc-navigator"]
+  "keywords": ["audit", "automation", "maturity", "claude-code"],
+  "skills": ["./meta-audit"]
 }
