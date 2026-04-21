@@ -1,0 +1,14 @@
+{
+  "name": "meta-audit",
+  "version": "1.0.0",
+  "description": "AI automation maturity audit and Claude Code workflow navigation",
+  "author": {
+    "name": "freemty",
+    "url": "https://github.com/freemty"
+  },
+  "homepage": "https://github.com/freemty/meta-audit",
+  "repository": "https://github.com/freemty/meta-audit",
+  "license": "MIT",
+  "keywords": ["audit", "automation", "navigator", "claude-code"],
+  "skills": ["./"]
+}
