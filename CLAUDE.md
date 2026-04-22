@@ -4,10 +4,10 @@ AI automation maturity audit plugin for Claude Code.
 
 ## Structure
 
-- `meta-audit/SKILL.md` — Skill definition: L0-L5 model, 5-axis radar, pipeline, action template
-- `meta-audit/sources.md` — External benchmark data sources and stats methodology
-- `meta-audit/collect.sh` — Deterministic local data collector (outputs JSON)
-- `meta-audit/test-collect.sh` — Smoke test for collect.sh
+- `SKILL.md` — Skill definition: L0-L5 model, 5-axis radar, pipeline, action template
+- `sources.md` — External benchmark data sources and stats methodology
+- `collect.sh` — Deterministic local data collector (outputs JSON)
+- `test-collect.sh` — Smoke test for collect.sh
 - `.claude-plugin/plugin.json` — Plugin manifest (single skill: meta-audit)
 
 ## Key Design Decisions
