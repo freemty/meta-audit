@@ -65,7 +65,7 @@ fi
 
 # Project-level hooks (search common project dirs)
 project_hooks="false"
-for d in . "$HOME/code" "$HOME/projects"; do
+for d in .; do
   if find "$d" -maxdepth 3 -path "*/.claude/settings.json" -exec grep -l '"hooks"' {} \; 2>/dev/null | head -1 | grep -q .; then
     project_hooks="true"
     break
