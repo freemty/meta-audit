@@ -22,6 +22,15 @@ Data sources for Phase 2 external benchmarking. Queried via `gh api`, cached for
 | `openai/codex` | Feature list + stars | Competitor capability alignment |
 | `nicepkg/claude-code-skill` | Total indexed skill count | Ecosystem breadth (long tail) |
 | `forrestchang/andrej-karpathy-skills` | Star count + skill structure + CLAUDE.md guidelines | Community behavioral guidelines plugin benchmark, Karpathy coding principles coverage |
+| `jiahao-shao1/sjh-skills` | skill count + workflow-stage coverage | Peer researcher skill collection (replica) — same-scale comparator to yuanbo-skills |
+
+## Research Harness Benchmarks
+
+衡量的不是 skill 覆盖率，而是 research session 生命周期 / harness 成熟度。详见 `docs/plugins/evolve-bench.md`。
+
+| Source | What to Query | Signal |
+|--------|--------------|--------|
+| `Sisyphe-lee/evolve_bench` | harness/ protocols + research/ spec + .claude/skills/ (report/review/direction/orchestrate) | Reference harness for AI-driven research projects — two-stage closure, file-is-state, programmatic validators |
 
 ## Extracted Fields
 
