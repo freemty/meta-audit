@@ -8,7 +8,9 @@ AI automation maturity audit plugin for Claude Code.
 - `sources.md` — External benchmark data sources and stats methodology
 - `collect.sh` — Deterministic local data collector (outputs JSON)
 - `test-collect.sh` — Smoke test for collect.sh
-- `.claude-plugin/plugin.json` — Plugin manifest (single skill: meta-audit)
+- `hook-recipes/SKILL.md` — Sub-skill: curated hook templates for closing audit gaps
+- `hook-recipes/recipes.json` — Structured hook template data (10 recipes, PostToolUse/PreToolUse/project-level)
+- `.claude-plugin/plugin.json` — Plugin manifest (skills: meta-audit, hook-recipes)
 
 ## Key Design Decisions
 
@@ -16,4 +18,6 @@ AI automation maturity audit plugin for Claude Code.
 - Scoring uses `collect.sh` output, not LLM counting — deterministic and reproducible
 - Benchmarks use coverage ratio (user / ecosystem max), not percentiles — sample size too small for P99
 - L3+ maturity requires outcome evidence (friction reduction), not just config counts
+- hook-recipes is a sub-skill that closes the "audit → action" gap — meta-audit identifies missing hooks, hook-recipes provides tested templates to apply them
+- Recipes are data-driven (recipes.json), not hardcoded in SKILL.md — easy to add new recipes without editing skill logic
 - cc-navigator was moved to yuanbo-skills (separate repo) — this plugin is audit-only

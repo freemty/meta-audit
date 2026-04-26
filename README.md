@@ -18,6 +18,7 @@ A [Claude Code](https://claude.ai/claude-code) skill that audits your AI coding 
 - **Friction-to-action mapping** -- extracts friction root causes from session data and maps them to concrete improvements
 - **Deterministic data collection** -- `collect.sh` outputs JSON metrics, no LLM counting
 - **`--quick` / `--verbose` modes** -- flexible depth control
+- **Hook Recipes** -- curated hook templates that close audit gaps in one step (see below)
 
 ## Usage
 
@@ -53,6 +54,22 @@ A [Claude Code](https://claude.ai/claude-code) skill that audits your AI coding 
 - Improved: Hook depth 0→7
 - Regressed: --
 ```
+
+## Hook Recipes (sub-skill)
+
+When an audit flags missing hook coverage, use `/hook-recipes` to apply tested templates instead of writing hooks from scratch.
+
+10 built-in recipes covering:
+
+| Category | Recipes | Audit Gap Closed |
+|----------|---------|-----------------|
+| PostToolUse type-check | tsc, pyright | `event_types_used` 3→4 |
+| PostToolUse lint | ruff, eslint | `total_entries` +1 |
+| PostToolUse format | prettier, ruff format | `total_entries` +1 |
+| PreToolUse guard | large-file, test-before-commit | `total_entries` +1 |
+| Project-level template | python-guard, ml-experiment-guard | `has_project_level` → true |
+
+Each recipe includes matcher, command, stack compatibility, and the exact `collect.sh` field it moves -- so you can verify the fix immediately.
 
 ## Install
 

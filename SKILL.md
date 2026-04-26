@@ -88,7 +88,7 @@ Example:
 ```
 Action 1: Add PostToolUse type-check hook
   What: Add a pyright check to hooks.PostToolUse in ~/.claude/settings.json
-  How: /update-config
+  How: /hook-recipes → select "Python Type Check" or "TypeScript Type Check"
   Verify: collect.sh → hooks.total_entries +1, hooks.event_types_used includes PostToolUse
 ```
 

@@ -1,0 +1,140 @@
+[
+  {
+    "id": "post-typecheck-tsc",
+    "name": "TypeScript Type Check",
+    "event": "PostToolUse",
+    "matcher": "Write|Edit",
+    "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_file_path\"; [[ \"$FILE\" == *.ts || \"$FILE\" == *.tsx ]] && npx tsc --noEmit --pretty 2>&1 | head -20 || true'",
+    "description": "Runs tsc --noEmit after writing/editing .ts/.tsx files. Catches type errors before they compound.",
+    "stack": ["typescript"],
+    "level_impact": {
+      "field": "hooks.event_types_used",
+      "before": 3,
+      "after": 4,
+      "note": "Adds PostToolUse event type"
+    }
+  },
+  {
+    "id": "post-typecheck-pyright",
+    "name": "Python Type Check",
+    "event": "PostToolUse",
+    "matcher": "Write|Edit",
+    "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_file_path\"; [[ \"$FILE\" == *.py ]] && pyright \"$FILE\" 2>&1 | tail -5 || true'",
+    "description": "Runs pyright on the edited Python file. Catches type mismatches early.",
+    "stack": ["python"],
+    "level_impact": {
+      "field": "hooks.event_types_used",
+      "before": 3,
+      "after": 4,
+      "note": "Adds PostToolUse event type"
+    }
+  },
+  {
+    "id": "post-lint-ruff",
+    "name": "Python Lint (ruff)",
+    "event": "PostToolUse",
+    "matcher": "Write|Edit",
+    "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_file_path\"; [[ \"$FILE\" == *.py ]] && ruff check \"$FILE\" 2>&1 | head -10 || true'",
+    "description": "Runs ruff lint on edited Python files. Fast alternative to flake8/pylint.",
+    "stack": ["python"],
+    "level_impact": {
+      "field": "hooks.total_entries",
+      "delta": 1
+    }
+  },
+  {
+    "id": "post-lint-eslint",
+    "name": "JS/TS Lint (eslint)",
+    "event": "PostToolUse",
+    "matcher": "Write|Edit",
+    "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_file_path\"; [[ \"$FILE\" == *.ts || \"$FILE\" == *.tsx || \"$FILE\" == *.js || \"$FILE\" == *.jsx ]] && npx eslint \"$FILE\" 2>&1 | head -10 || true'",
+    "description": "Runs eslint on edited JS/TS files. Catches style and logic issues.",
+    "stack": ["typescript", "javascript"],
+    "level_impact": {
+      "field": "hooks.total_entries",
+      "delta": 1
+    }
+  },
+  {
+    "id": "post-format-prettier",
+    "name": "Auto-format (prettier)",
+    "event": "PostToolUse",
+    "matcher": "Write|Edit",
+    "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_file_path\"; [[ \"$FILE\" == *.ts || \"$FILE\" == *.tsx || \"$FILE\" == *.js || \"$FILE\" == *.jsx || \"$FILE\" == *.json || \"$FILE\" == *.css ]] && npx prettier --write \"$FILE\" 2>/dev/null || true'",
+    "description": "Auto-formats frontend files after edit. Keeps consistent style without manual intervention.",
+    "stack": ["typescript", "javascript"],
+    "level_impact": {
+      "field": "hooks.total_entries",
+      "delta": 1
+    }
+  },
+  {
+    "id": "post-format-ruff-format",
+    "name": "Auto-format (ruff format)",
+    "event": "PostToolUse",
+    "matcher": "Write|Edit",
+    "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_file_path\"; [[ \"$FILE\" == *.py ]] && ruff format \"$FILE\" 2>/dev/null || true'",
+    "description": "Auto-formats Python files after edit. Drop-in replacement for black, much faster.",
+    "stack": ["python"],
+    "level_impact": {
+      "field": "hooks.total_entries",
+      "delta": 1
+    }
+  },
+  {
+    "id": "pre-large-file-guard",
+    "name": "Large File Guard",
+    "event": "PreToolUse",
+    "matcher": "Write",
+    "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_file_path\"; CONTENT=\"$CLAUDE_TOOL_ARG_content\"; LINES=$(echo \"$CONTENT\" | wc -l); if [ \"$LINES\" -gt 800 ]; then echo \"BLOCK: Writing $LINES lines to $FILE exceeds 800-line limit. Split into smaller files.\" >&2; exit 1; fi'",
+    "description": "Blocks writes over 800 lines, enforcing the small-file convention. Prevents monolith files.",
+    "stack": ["any"],
+    "level_impact": {
+      "field": "hooks.total_entries",
+      "delta": 1
+    }
+  },
+  {
+    "id": "pre-test-before-commit",
+    "name": "Test Before Commit",
+    "event": "PreToolUse",
+    "matcher": "Bash",
+    "command": "bash -c 'CMD=\"$CLAUDE_TOOL_ARG_command\"; if echo \"$CMD\" | grep -qE \"^git commit\"; then echo \"WARN: Running tests before commit is recommended. Consider running the test suite first.\" >&2; fi; true'",
+    "description": "Warns (non-blocking) when git commit is attempted, reminding to run tests first.",
+    "stack": ["any"],
+    "level_impact": {
+      "field": "hooks.total_entries",
+      "delta": 1
+    }
+  },
+  {
+    "id": "project-python-guard",
+    "name": "Python Project Guard (template)",
+    "event": "PreToolUse",
+    "matcher": "Bash",
+    "command": "bash -c '# Customize: add project-specific command guards here\n# Example: block direct pip install without --dry-run\nCMD=\"$CLAUDE_TOOL_ARG_command\"; if echo \"$CMD\" | grep -qE \"pip install(?!.*--dry-run)\"; then echo \"BLOCK: Use pip install --dry-run first\" >&2; exit 1; fi; true'",
+    "description": "Template for project-level Python guards. Install in .claude/settings.json of a specific project. Customize the command pattern for your domain.",
+    "stack": ["python"],
+    "scope": "project",
+    "level_impact": {
+      "field": "hooks.has_project_level",
+      "before": false,
+      "after": true
+    }
+  },
+  {
+    "id": "project-ml-experiment-guard",
+    "name": "ML Experiment Guard (template)",
+    "event": "PreToolUse",
+    "matcher": "Bash",
+    "command": "bash -c '# Customize: enforce dry-run, require GPU flags, etc.\nCMD=\"$CLAUDE_TOOL_ARG_command\"; if echo \"$CMD\" | grep -qE \"(train|launch)\" && ! echo \"$CMD\" | grep -q \"dry.run\"; then echo \"BLOCK: Add --dry-run flag for first run\" >&2; exit 1; fi; true'",
+    "description": "Template for ML project experiment guards. Enforces dry-run before real training runs. Customize patterns for your launcher.",
+    "stack": ["python", "ml"],
+    "scope": "project",
+    "level_impact": {
+      "field": "hooks.has_project_level",
+      "before": false,
+      "after": true
+    }
+  }
+]

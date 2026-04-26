@@ -10,5 +10,5 @@
   "repository": "https://github.com/freemty/meta-audit",
   "license": "MIT",
   "keywords": ["audit", "automation", "maturity", "claude-code"],
-  "skills": ["."]
+  "skills": [".", "hook-recipes"]
 }
