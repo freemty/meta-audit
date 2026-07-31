@@ -2,13 +2,16 @@
 
 Know your automation maturity level -- and what to build next.
 
-A [Claude Code](https://claude.ai/claude-code) skill that audits your AI coding tool setup against an L0-L5 maturity model, benchmarks you against the ecosystem's top power users, and outputs a focused action plan to close the biggest gaps.
+An Agent Skill that audits workflow maturity and context-engineering debt, then
+maps observed friction to the smallest effective interface, reference, test, or
+automation change.
 
 ## When to Use
 
 - Monthly automation audit or after completing a major milestone
 - You feel a productivity bottleneck but can't pinpoint where
 - You want a data-driven answer to "what should I build next?"
+- Skills, instruction files, or hooks have grown and may now conflict
 
 ## Features
 
@@ -19,6 +22,8 @@ A [Claude Code](https://claude.ai/claude-code) skill that audits your AI coding 
 - **Deterministic data collection** -- `collect.sh` outputs JSON metrics, no LLM counting
 - **`--quick` / `--verbose` modes** -- flexible depth control
 - **Hook Recipes** -- curated hook templates that close audit gaps in one step (see below)
+- **Context audit** -- detects overlong entrypoints, host-specific portable
+  bodies, imperative density, and injected hook surface
 
 ## Usage
 
@@ -26,6 +31,8 @@ A [Claude Code](https://claude.ai/claude-code) skill that audits your AI coding 
 /meta-audit              # full audit (with external benchmarks)
 /meta-audit --quick      # skip external benchmarks, local data only
 /meta-audit --verbose    # output full friction detail + raw benchmark data
+python3 scripts/context_audit.py --check /path/to/repo
+python3 scripts/context_audit.py --json /path/to/repo
 ```
 
 ## Output Example
