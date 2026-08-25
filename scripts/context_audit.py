@@ -66,8 +66,8 @@ def main() -> int:
         findings = []
         if words > 500:
             findings.append("entrypoint-over-500-words")
-        if re.search(r"^allowed-tools:", frontmatter, re.MULTILINE):
-            findings.append("host-specific-frontmatter")
+        # allowed-tools is intentionally kept: Claude Code enforces it and
+        # other hosts ignore unknown frontmatter keys harmlessly.
         desc = description(frontmatter)
         if desc and not (desc.startswith("Use when") or desc in {">", "|", ">-", "|-"}):
             findings.append("description-is-not-trigger-first")
