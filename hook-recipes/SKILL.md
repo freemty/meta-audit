@@ -1,6 +1,6 @@
 ---
 name: hook-recipes
-description: Use when a deterministic safety or feedback boundary genuinely requires a host lifecycle hook.
+description: Use when a deterministic safety or feedback boundary genuinely requires a host lifecycle hook. Triggers on "add a hook", "what hooks should I have", "fix my hook coverage", or after meta-audit shows hook gaps.
 ---
 
 # Hook Recipes

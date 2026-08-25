@@ -1,6 +1,6 @@
 ---
 name: meta-audit
-description: Use when explicitly auditing an agent workflow, repository automation maturity, repeated friction, or context-engineering debt.
+description: Use when explicitly auditing an agent workflow, repository automation maturity, repeated friction, or context-engineering debt. Triggers on /meta-audit, "audit my setup", "how automated am I", "what should I build next", "automation maturity check".
 ---
 
 # Meta Audit
