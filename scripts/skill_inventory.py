@@ -30,14 +30,26 @@ def parse_frontmatter(text):
                 i += 1
             result[key] = ('\n' if value.startswith('|') else ' ').join(parts).strip()
         elif value.startswith('"'):
-            try:
-                result[key] = json.JSONDecoder().raw_decode(value)[0]
-            except ValueError:
-                return None
+            while True:
+                try:
+                    decoded, end = json.JSONDecoder().raw_decode(value)
+                    if value[end:].strip() and not value[end:].lstrip().startswith('#'):
+                        return None
+                    result[key] = decoded
+                    break
+                except ValueError:
+                    if i >= len(lines) or lines[i].strip() == '---':
+                        return None
+                    value += ' ' + lines[i].strip()
+                    i += 1
         elif value.startswith("'"):
             quoted = re.match(r"^'((?:[^']|'')*)'(?:\s+#.*)?$", value)
-            if not quoted:
-                return None
+            while not quoted:
+                if i >= len(lines) or lines[i].strip() == '---':
+                    return None
+                value += ' ' + lines[i].strip()
+                i += 1
+                quoted = re.match(r"^'((?:[^']|'')*)'(?:\s+#.*)?$", value)
             result[key] = quoted[1].replace("''", "'")
         else:
             result[key] = re.split(r'\s+#', value, maxsplit=1)[0].strip()
