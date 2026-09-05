@@ -5,16 +5,22 @@ description: Use when a deterministic safety or feedback boundary genuinely requ
 
 # Hook Recipes
 
-Use a hook only when the event boundary itself matters. Prefer a tool schema,
-script, test, CI check, or model judgment for everything else.
+Use a hook only when the event boundary matters. Prefer an explicit tool, script,
+test or CI check when it meets the task with less repeated context.
 
-1. Define the exact event, matcher, deterministic signal, and desired effect.
-2. Check for an existing equivalent and for a lower-context implementation.
-3. Read `recipes.json` and select the closest compatible recipe.
-4. Adapt paths and host payload shape, show the exact mutation, and obtain
-   approval.
-5. Trigger the real host event and verify both matching and non-matching cases.
+Define the event, actual payload, deterministic signal, desired effect and scope.
+Check for an existing equivalent. Read `recipes.json`: these are six declarative
+read-only feedback templates, not installable shell commands or permission gates.
+Resolve the project-installed executable; do not let a package runner install
+an unrequested tool. Adapt successful-edit signals, file paths and output format
+to the actual host. Pass file paths as arguments, not interpolated shell code.
 
-Good hooks enforce destructive-action boundaries or run cheap deterministic
-feedback. Avoid catalogs, cross-sell reminders, generic planning prompts, and
-frequent natural-language nudges.
+An explicit request to add a scoped hook authorizes that change; do not ask for
+the same approval again. Ask only for a consequential missing scope or additional
+external operation. A request to audit hooks is read-only.
+
+Test matching, nonmatching, failed and missing-tool cases. Trigger a real host
+event when available, distinguishing that from payload fixture tests. Do not
+claim a hook enforces permissions unless the host's documented blocking semantics
+were tested. Avoid arbitrary file-size limits, generic test reminders, forced
+dry runs and suggestions that merely increase a hook-count score.
