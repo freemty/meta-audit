@@ -2,6 +2,8 @@
 
 ## [1.1.0] - 2026-09-05
 
+- Validate Claude component paths with the required ./ prefix before installation.
+
 - Shared public/workspace inventory, quoted/multiline descriptions and host metadata.
 - Follow referenced instructions; hard links/policy failures are separate from
   length and imperative-density review signals. No fixed 50-skill gate.
